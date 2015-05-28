@@ -1,0 +1,102 @@
+<!doctype html>
+<html ng-app="StackathonApp" ng-csp>
+  <head>
+    <title>Laser Focus App Options</title>
+    <link rel="stylesheet" type="text/css" href="../libs/bootstrap.min.css"/>
+    <!-- <link href="options.css" rel="stylesheet" type="text/css"> -->
+    <script src="../libs/angular.min.js"></script>
+    <script src="../libs/jquery-2.1.4.min.js"></script>
+    <script src="../libs/bootstrap.min.js"></script>
+    <script src="../app.js"></script>
+    <script src="options.js"></script>
+  </head>
+    <div class="container" ng-controller="OptionsController" >
+      <h2>Laser Focus Options</h2>
+      <form id="options">
+          Focus Block Length:
+        <select name="focusLength">
+          <option>1</option>
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>20</option>
+          <option>25</option>
+          <option>30</option>
+          <option>35</option>
+          <option>40</option>
+          <option>45</option>
+          <option>50</option>
+          <option>55</option>
+          <option>60</option>
+        </select>
+        minute(s).
+          <br>
+          <br>
+          Short Break Length:
+        <select name="shortBreakLength">
+          <option>1</option>
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>20</option>
+          <option>25</option>
+          <option>30</option>
+          <option>35</option>
+          <option>40</option>
+          <option>45</option>
+          <option>50</option>
+          <option>55</option>
+          <option>60</option>
+        </select>
+        minute(s).
+        <br>
+        <br>
+          Long Break Length:
+        <select name="longBreakLength">
+          <option>1</option>
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>20</option>
+          <option>25</option>
+          <option>30</option>
+          <option>35</option>
+          <option>40</option>
+          <option>45</option>
+          <option>50</option>
+          <option>55</option>
+          <option>60</option>
+        </select>
+        minute(s).
+        <br>
+        <br>
+        Show Notifications:
+        <input type="checkbox" name="notifications" checked>
+        <br>
+        <br>
+        Play Sounds:
+        <input type="checkbox" name="sounds" checked>
+        <br>
+        <br>
+        Block Unproductive Sites: 
+        <input type="checkbox" name="blockUnproductiveSites" checked>
+        <br>
+        <br>
+        <form ng-submit="addBlockSite()">
+          <div class="input-group input-group-sm col-xs-2">
+              <input type="text" class="form-control" placeholder="Type URL Here..." ng-model="siteToAdd" ng-disabled="!blockUnproductiveSites"/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="addBlockSite()" ng-disabled="!blockUnproductiveSites">Add!</button>
+              </span>
+          </div>
+        </form>
+        <br>
+        <br>
+        Blocked Sites:
+        <ul class="list-group">
+            <li ng-repeat="site in blockedSites" style="margin-left: 20px;"> {{site}} <button class="btn btn-danger btn-xs" ng-click="removeBlockSite(site)" style="margin-left: 20px;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></li>
+        </ul>
+      </form>
+    </div>
+  </body>
+</html>

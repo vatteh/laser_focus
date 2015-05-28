@@ -1,0 +1,29 @@
+{
+	"manifest_version": 2,
+	"name": "Laser Focus",
+	"version": "0.1.0",
+	"description": "A simple productivity app based off the Pomodoro Technique.",
+	"author": "Victor Atteh",
+	"browser_action": {
+		"default_title": "A simple productivity app",
+		"default_popup": "popup/popup.html"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": ["tabs", "notifications", "http://*/*", "https://*/*"],
+	// "content_scripts": [{
+	// 	"matches": ["http://*/*", "https://*/*"],
+	// 	    "css": ["libs/jquery-ui.min.css"],
+	// 	    "js": ["libs/jquery-2.1.4.min.js", "libs/jquery-ui.min.js"]
+	// }],
+	"options_page": "options/options.html",
+	"chrome_url_overrides": {
+	    "newtab": "newtab/newtab.html"
+	},
+	"icons": {
+	  	"16": "images/red-16.png",
+	  	"48": "images/red-48.png",
+	  	"128": "images/red-128.png"
+	}	
+}

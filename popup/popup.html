@@ -1,0 +1,71 @@
+<html ng-app="StackathonApp" ng-csp>
+	<head>
+		<title>Laser Focus</title>
+		<link rel="stylesheet" type="text/css" href="../libs/bootstrap.min.css"/>
+		<link rel="stylesheet" href="../libs/angular-csp.css"/>
+		<script src="../libs/angular.min.js"></script>
+		<script src="../libs/jquery-2.1.4.min.js"></script>
+		<script src="../libs/bootstrap.min.js"></script>
+		<script src="../app.js"></script>
+	</head>
+	<body>
+		<div ng-controller="PanelController">
+			<div class="panel panel-defaut" style="width: 350px">
+				<h4 class="panel-heading">Laser Focus <small>{{subHeading}}</small></h4>
+				<div class="panel-body">
+					<div class="progress">
+					  	<div class="progress-bar" role="progressbar" style="width: {{secondsLeftPercent}}%;">
+					    {{secondsLeftFormatted}}
+					  	</div>
+					</div>
+
+					<span class="label label-danger">Focus Blocks Completed: {{focusBlocksCompleted}}</span>
+					
+					</br>
+
+					<span class="label label-danger">Total Time in Session: {{totalSessionTime}}</span>
+
+			  		</br>
+			  		</br>
+
+					<p ng-hide="currentTimer">Write your goals for this Study Session:</p>
+					<p ng-show="currentTimer">Todo list for this session:</p>
+				  	<form ng-submit="submitNewTask()" ng-hide="currentTimer">
+				  		<div class="input-group">
+					  	    <input type="text" class="form-control" placeholder="Add a task ..." ng-model="newTask">
+					  	    <span class="input-group-btn">
+					  	    	<button class="btn btn-default" type="button" ng-click="submitNewTask()">Add!</button>
+					  	    </span>
+				  		</div>
+					</form>
+
+				  	<ul class="list-group">
+				  	    <li class="list-group-item" ng-repeat="task in taskList track by $index">
+			    			<input type="checkbox" ng-model="task.completed" ng-show="currentTimer">
+				  	    	<span ng-style="task.completed && {'text-decoration': 'line-through'}">{{task.task}}</span>
+				  	    	<button class="btn btn-danger btn-sm" style="float: right;" ng-click="removeTask(task)" ng-hide="currentTimer">
+				  	    		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				  	    	</button>
+				  	    </li>
+				  	</ul>
+				  	
+				  	<!-- Could not use data-dismiss="alert" as it does not allow alerts to repappear multiple times -->
+
+				  	<div class="alert alert-danger alert-dismissible" role="alert" ng-show="noTaskAlert">
+				  	  	<button type="button" class="close" ng-click="noTaskAlert = false" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  	  	<strong>Error!</strong> You need enter at least one task before starting a session.
+				  	</div>
+
+				  	<div class="alert alert-warning" role="alert" ng-show="unfinishedTasksAlert">
+				  	  	<span><strong>Warning!</strong> You still have unfinished tasks! You sure you want to end this session?</span>
+				  	  	<button class="btn btn-default btn-xs" type="button" ng-click="dismissUnfinishedTaskAlert(false)" style="margin: 5px;">No, I want to finish these tasks</button>
+				  	  	<button class="btn btn-warning btn-xs" type="button" ng-click="dismissUnfinishedTaskAlert(true)" style="margin: 5px;">Yep, I'm done with this session</button>
+				  	</div>
+
+				  	<button class="btn btn-danger btn-xs" ng-click="startSession()" ng-hide="unfinishedTasksAlert" style="float: right;">{{startButtonText}}</button>
+
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
